@@ -1,6 +1,6 @@
 # Mouse-Synthesis
 
-Mouse-Synthesise synthesize HIDs directly from hardware **bypassing lower-level detections**. <br /> 
+Mouse-Synthesise synthesises HIDs at a **higher layer than any driver-stack fingerprints**. <br /> 
 To synthesize HIDs we call ```SynthesizeMouseInput``` injecting input at the **final layer before the application receives** it. <br /> 
 HID synthetization is better than HID injection because it **enters the stack after every tracked layer** so **there's nothing to hook or monitor**.  <br /> 
 
