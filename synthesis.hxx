@@ -383,8 +383,8 @@ namespace mouse {
 			input.last_y = y;
 			input.extra_information = 0;
 
-      // We allocate a kernel mode buffer for the structure since we're in usermode.
-      // For example similar to what we do in generate_call_stub, if you're moving this into a kernel mode it would be recommeneded to change this.
+      		// We allocate a kernel mode buffer for the structure since we're in usermode.
+      		// For example similar to what we do in generate_call_stub, if you're moving this into a kernel mode it would be recommeneded to change this.
 			if ( !m_mouse_input_data ) {
 				m_mouse_input_data =
 					kernel::allocate_pages(
