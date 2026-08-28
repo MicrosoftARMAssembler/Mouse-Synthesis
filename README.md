@@ -2,7 +2,7 @@
 
 Mouse-Synthesise synthesize HIDs directly from hardware **bypassing higher-level detections**. <br /> 
 To synthesize HIDs we call ```SynthesizeMouseInput``` injecting input at the **same level HID hardware delivers** it. <br /> 
-It's **better** than public methods like mouclass HID injection because it **enters the stack below every tracked layer**, meaning **there is nothing to hook or monitor**.  <br /> 
+HID synthetization is better than HID injection because it **enters the stack below every tracked layer** so **there's nothing to hook or monitor**.  <br /> 
 If you are **looking for the missing dependencies** like PDB, kernel function call, e.g.. frameworks <a href="https://github.com/MicrosoftARMAssembler/Kunai-Driverless/tree/main/kunai-driverless">click here</a> for them.  <br /> 
 
 # How does the synthesis work?
