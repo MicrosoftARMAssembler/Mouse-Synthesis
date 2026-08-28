@@ -12,6 +12,17 @@ We craft the packet to **match real physical HIDs** by setting ```unit_id``` to 
 
 <img width="779" height="584" alt="image" src="https://github.com/user-attachments/assets/67bb9eaa-280b-4b55-8ebe-66b6e37a1ed6" />
 
+# What can the synthesis do?
+Mouse-Synthesis only uses **absolute movement** ( ```packet_absolute``` ) normalizing all coordinates. <br />
+We haven't implemented **delta movement** ( ```packet_relative``` ) because games like **Fortnite** process raw input and will **reject relative packets**. <br />
+The interface supports **mouse button clicks** and **mouse movement** using absolute or relative movements. <br />
+
+# Why not MouClass?
+
+Public HID injection methods that hook or call through MouClass.sys are **detected** because every packet they generate passes through the **class driver stack**. <br /> 
+**Meaning anti-cheats like EAC** can install a filter driver, monitor the device object or trace MOUSE_INPUT_DATA arrays through ETW providers. <br />
+Mouse-Synthesis **bypasses all of these integrity checks** because it injects directly into the **win32k raw input queue** where hardware arrives. <br />
+
 # User-Mode Implementation
 Mouse-Synthesis **runs entirely from user-mode** using our syscall hook inside **ntoskrnl.exe** to **call kernel functions**. <br />
 Since we're **usermode** we need to **allocate live-kernel memory** instead of **stack allocated buffers** in a kernel mode driver. <br />
@@ -29,10 +40,5 @@ m_stub_page = mapper::allocate_large_page(
     obf( "ntoskrnl.exe" ),
     0x1000 );
 ```
-
-# What can the synthesis do?
-Mouse-Synthesis only uses **absolute movement** ( ```packet_absolute``` ) normalizing all coordinates. <br />
-We haven't implemented **delta movement** ( ```packet_relative``` ) because games like **Fortnite** process raw input and will **reject relative packets**. <br />
-The interface supports **mouse button clicks** and **mouse movement** using absolute or relative movements. <br />
 
 # Follow my Github and check out my other projects!
