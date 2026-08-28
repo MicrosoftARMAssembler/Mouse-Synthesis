@@ -1,8 +1,8 @@
 # Mouse-Synthesis
 
-Mouse-Synthesise synthesize HIDs directly from hardware **bypassing higher-level detections**. <br /> 
-To synthesize HIDs we call ```SynthesizeMouseInput``` injecting input at the **same level HID hardware delivers** it. <br /> 
-HID synthetization is better than HID injection because it **enters the stack below every tracked layer** so **there's nothing to hook or monitor**.  <br /> 
+Mouse-Synthesise synthesize HIDs directly from hardware **bypassing lower-level detections**. <br /> 
+To synthesize HIDs we call ```SynthesizeMouseInput``` injecting input at the **final layer before the application receives** it. <br /> 
+HID synthetization is better than HID injection because it **enters the stack after every tracked layer** so **there's nothing to hook or monitor**.  <br /> 
 
 # How does the synthesis work?
 Mouse-Synthesis resolves ```SynthesizeMouseInput``` from **win32kbase.sys** and calls it from kernel after **constructing a** ```MOUSE_INPUT_DATA``` **packet**. <br />
@@ -20,7 +20,7 @@ The interface supports **mouse button clicks** and **mouse movement** using abso
 
 Public HID injection methods that hook or call through MouClass.sys are **detected** because every packet they generate passes through the **class driver stack**. <br /> 
 **Meaning anti-cheats like EAC** can install a filter driver, monitor the device object or trace MOUSE_INPUT_DATA arrays through ETW providers. <br />
-Mouse-Synthesis **bypasses all of these integrity checks** because it injects directly into the **win32k raw input queue** where hardware arrives. <br />
+Mouse-Synthesis **bypasses all of these integrity checks** because it **injects directly** into the **win32k raw input queue** where the **driver stack ends**. <br />
 
 # User-Mode Implementation
 Mouse-Synthesis **runs entirely from user-mode** using our syscall hook inside **ntoskrnl.exe** to **call kernel functions**. <br />
