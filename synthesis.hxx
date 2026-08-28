@@ -68,9 +68,9 @@ namespace mouse {
 				obf( "using mouse unit: 0x%x" ),
 				m_unit_id );
 
-     // we're executing this function from usermode using system call hooking in NTOSKRNL.exe.
-     // Since our system call hook is inside of NTOSKRNL.exe, we need to allocate a shellcode stub that's inside of ntoskrnl to call our function inside of WIN32KBASE.sys.
-     // If you're reimplementing this into your driver you don't need to generate your own shellcode stub.
+     		// we're executing this function from usermode using system call hooking in NTOSKRNL.exe.
+     		// Since our system call hook is inside of NTOSKRNL.exe, we need to allocate a shellcode stub that's inside of ntoskrnl to call our function inside of WIN32KBASE.sys.
+     		// If you're reimplementing this into your driver you don't need to generate your own shellcode stub.
       
 			m_stub_page = mapper::allocate_large_page(
 				obf( "ntoskrnl.exe" ),
